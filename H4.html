@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo</title>
+
+    <!-- Roboto font embed -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="reset.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <header>
+        <input type="text" placeholder="Tambah Rencana Aktifitas Di Sini Bos...." id="input">
+        <button id="button">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
+                style="enable-background:new 0 0 16 16;" xml:space="preserve">
+                <g>
+                    <path class="fill" d="M16,8c0,0.5-0.5,1-1,1H9v6c0,0.5-0.5,1-1,1s-1-0.5-1-1V9H1C0.5,9,0,8.5,0,8s0.5-1,1-1h6V1c0-0.5,0.5-1,1-1s1,0.5,1,1v6h6C15.5,7,16,7.5,16,8z"
+                    />
+                </g>
+            </svg>
+        </button>
+    </header>
+
+    <div class="container">
+        <ul class="todo" id="list"></ul>
+    </div>
+    <!-- JS -->
+    <script>
+        let data = [];
+
+        localData = JSON.parse(localStorage.getItem('data'));
+        if (localData != null) {
+            data = localData;
+        }
+
+
+        const inputDOM = document.getElementById('input');
+
+        // TODO
+        // buatlah variabel DOM untuk mengakses button
+        const buttonDOM = document.getElementById('button');
+
+        // buatlah variabel DOM untuk mengakses ol
+        const listDOM = document.getElementById('list');
+
+        // listDOM.innerHTML = localStorage.getItem('data');
+
+        buttonDOM.addEventListener('click', function () {
+            const kartun = inputDOM.value;
+            data.push(kartun);
+            render();
+            // listDOM.innerHTML = listDOM.innerHTML + "<li>" + kartun + "</li>";
+            inputDOM.value = "";
+            localStorage.setItem('data', JSON.stringify(data));
+            // alert('hello');
+
+        });
+
+        function render() {
+            let html = "";
+            for (var i = 0; i < data.length; i++) {
+                // html = html + "<li>" + data[i] + "</li>";
+                html = html + `<li class="list-group-item" onClick="remove(${i})">${data[i]}</li>`;
+            }
+
+            listDOM.innerHTML = html;
+        }
+
+        render();
+
+
+        function remove(id) {
+            data.splice(id, 1);
+            localStorage.setItem('data', JSON.stringify(data));
+            render();
+        }
+    </script>
+</body>
+
+</html>
