@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Todo</title>
+    <title>Todo List Javascript</title>
 
     <!-- Roboto font embed -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
@@ -54,14 +54,12 @@
         // listDOM.innerHTML = localStorage.getItem('data');
 
         buttonDOM.addEventListener('click', function () {
-            const kartun = inputDOM.value;
-            data.push(kartun);
+            const aksi = inputDOM.value;
+            data.push(aksi);
             render();
-            // listDOM.innerHTML = listDOM.innerHTML + "<li>" + kartun + "</li>";
+            // listDOM.innerHTML = listDOM.innerHTML + "<li>" + aksi + "</li>";
             inputDOM.value = "";
             localStorage.setItem('data', JSON.stringify(data));
-            // alert('hello');
-
         });
 
         function render() {
